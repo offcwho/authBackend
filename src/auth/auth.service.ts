@@ -9,7 +9,7 @@ import { LoginDto } from './dto/login.dto';
 // Определяем сервис для обработки аутентификации
 @Injectable()
 export class AuthService {
-  constructor(private prisma: PrismaService, private jwt: JwtService) {}
+  constructor(private prisma: PrismaService, private jwt: JwtService) { }
 
   // Регистрация нового пользователя
   async register(dto: RegisterDto) {
@@ -49,7 +49,7 @@ export class AuthService {
       throw new UnauthorizedException('Invalid refresh token');
     }
   }
-
+  
   // Генерация access и refresh токенов
   private generateTokens(userId: number, email: string, role: string) {
     // Создаем access-токен с временем жизни 15 минут

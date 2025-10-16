@@ -25,3 +25,16 @@ model User {
 
   @@map("users")
 }
+
+model Post {
+  id        Int      @id @default(autoincrement())
+  createdAt DateTime @default(now()) @map("created_at")
+  updatedAt DateTime @updatedAt @map("updated_at")
+
+  title       String
+  description String
+  content     String
+  isActive    Boolean @map("is_active")
+
+  @@map("posts")
+}
