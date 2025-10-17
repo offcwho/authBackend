@@ -8,14 +8,19 @@ export class PostsService {
   constructor(private readonly prismaService: PrismaService) { }
 
   findAll() {
-    const posts = this.prismaService.post.findMany()
+    const posts = this.prismaService.post.findMany({
+      where: { isActive: true }
+    })
     if (!posts) throw new NotFoundException(`Постов нет, но есть сиськи (.) (.)`)
     return posts
   }
 
   findOne(id: number) {
     const post = this.prismaService.post.findUnique({
-      where: { id }
+      where: {
+        id: id,
+        isActive: true
+      }
     })
     if (!post) throw new NotFoundException(`Ничего c ${id} не найдено!`)
     return post
