@@ -23,6 +23,8 @@ model User {
   refreshToken String? @map("refresh_token")
   role         Role    @default(USER)
 
+  tasks Task[]
+
   @@map("users")
 }
 
@@ -37,4 +39,19 @@ model Post {
   isActive    Boolean @map("is_active")
 
   @@map("posts")
+}
+
+model Task {
+  id        Int      @id @default(autoincrement())
+  createdAt DateTime @default(now()) @map("created_at")
+  updatedAt DateTime @updatedAt @map("updated_at")
+
+  title       String
+  description String?
+  completed   Boolean @default(false)
+
+  userId Int  @map("user_id")
+  user   User @relation(fields: [userId], references: [id])
+
+  @@map("tasks")
 }
